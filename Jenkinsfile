@@ -11,7 +11,8 @@ pipeline {
       stage('Unit Test') {
             steps {
               sh "mvn test"
-              sh "mvn surefire-report:report"
+            //  sh "mvn surefire-report:report"
+              junit 'target/surefire-reports/TEST-*.xml'
             }
         } 
       stage('Mutation Tests - PIT') {
