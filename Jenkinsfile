@@ -8,6 +8,7 @@ environment {
     imageName = "shibanshughosh/numeric-app:${GIT_COMMIT}"
     applicationURL = "http://devsecops-demo.eastus.cloudapp.azure.com/"
     applicationURI = "/increment/99"
+    commitId = "${GIT_COMMIT}"
 }
 
   stages {
