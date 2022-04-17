@@ -11,6 +11,7 @@ pipeline {
       stage('Unit Test') {
             steps {
               sh "mvn test"
+              sh "mvn surefire-report:report"
             }
         } 
       stage('Mutation Tests - PIT') {
@@ -18,17 +19,17 @@ pipeline {
               sh "mvn org.pitest:pitest-maven:mutationCoverage"
             }
       } 
-      stage('Dependency Scan - Docker ') {
-            steps {
-            //  sh "mvn dependency-check:check"
-                echo 'Dependency Scan passed'
-            }
-            // post {
-            //   always {
-            //     dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
-            //   }
-            // }
-      }
+      // stage('Dependency Scan - Docker ') {
+      //       steps {
+      //       //  sh "mvn dependency-check:check"
+      //           echo 'Dependency Scan passed'
+      //       }
+      //       // post {
+      //       //   always {
+      //       //     dependencyCheckPublisher pattern: 'target/dependency-check-report.xml'
+      //       //   }
+      //       // }
+      // }
       stage('SonarQube - SAST') {
             steps {
             /*  withSonarQubeEnv('SonarQube') {
