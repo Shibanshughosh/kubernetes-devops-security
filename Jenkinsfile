@@ -109,13 +109,13 @@ environment {
             }
           }
         }
-        stage('Kubernetes Rollout Status') {
-            steps {
-              withKubeConfig([credentialsId: 'kubeconfig']) {
-                    sh "bash k8s-deployment-rollout-status.sh"
-            }
-          }
-        }
+        // stage('Kubernetes Rollout Status') {
+        //     steps {
+        //       withKubeConfig([credentialsId: 'kubeconfig']) {
+        //             sh "bash k8s-deployment-rollout-status.sh"
+        //     }
+        //   }
+        // }
 
 
         // stage('K8S Deployment - DEV') {
