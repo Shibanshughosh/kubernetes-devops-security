@@ -4,6 +4,8 @@
 #k8s-deployment.sh
 
 sed -i "s#replace#${imageName}#g" k8s_deployment_service.yaml
+kubectl -n default apply -f k8s_deployment_service.yaml
+
 # kubectl -n default get deployment ${deploymentName} > /dev/null
 
 # if [[ $? -ne 0 ]]; then
@@ -17,6 +19,6 @@ sed -i "s#replace#${imageName}#g" k8s_deployment_service.yaml
 
 ##above was only updating the image and not the entire specs
 
-kubectl -n default apply -f k8s_deployment_service.yaml
+
 
 ############### k8s-deployment.sh ###############
