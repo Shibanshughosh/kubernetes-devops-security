@@ -4,9 +4,9 @@
 #k8s-deployment-rollout-status.sh
 
 sleep 60s
-echo "create deployment log file"
-kubectl describe deploy devsecops -n default >> deploy-failure.txt
-echo "log file created"
+# echo "create deployment log file"
+# kubectl describe deploy devsecops -n default >> deploy-failure.txt
+# echo "log file created"
 
 if [[ $(kubectl -n default rollout status deploy ${deploymentName} --timeout 5s) != *"successfully rolled out"* ]]; 
 then     
