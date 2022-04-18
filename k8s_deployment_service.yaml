@@ -21,7 +21,6 @@ spec:
         name: devsecops-container
         securityContext:
           runAsNonRoot: true
-          runAsUser: 100
           
 ---
 apiVersion: v1
