@@ -1,9 +1,15 @@
 pipeline {
   agent any
 
-  environment {
+environment {
     deploymentName = "devsecops"
-  }  
+    containerName = "devsecops-container"
+    serviceName = "devsecops-svc"
+    imageName = "shibanshughosh/numeric-app:${GIT_COMMIT}"
+    applicationURL = "http://devsecops-demo.eastus.cloudapp.azure.com/"
+    applicationURI = "/increment/99"
+    commitId = "${GIT_COMMIT}"
+}
 
   stages {
       stage('Build Artifact') {
@@ -76,11 +82,25 @@ pipeline {
               }
             }
         } 
+        // stage('Vulnerability Scan - Kubernetes') {
+        //     steps {
+        //       sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
+        //     }
+        // }
         stage('Vulnerability Scan - Kubernetes') {
             steps {
-              sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
+              parallel(
+                "OPA Scan": {
+                  sh 'docker run --rm -v $(pwd):/project openpolicyagent/conftest test --policy opa-k8s-security.rego k8s_deployment_service.yaml'
+                },
+                "Kubesec Scan": {
+                  sh "bash kubesec-scan.sh"
+                }
+              )
             }
         }
+
+
         stage('Kubernetes Deployment - DEV') {
             steps {
               withKubeConfig([credentialsId: 'kubeconfig']) {
@@ -89,13 +109,32 @@ pipeline {
             }
           }
         }
-          // stage('Kubernetes Rollout Status') {
+        stage('Kubernetes Rollout Status') {
+            steps {
+              withKubeConfig([credentialsId: 'kubeconfig']) {
+                    sh "bash k8s-deployment-rollout-status.sh"
+            }
+          }
+        }
+
+
+        // stage('K8S Deployment - DEV') {
         //     steps {
-        //       withKubeConfig([credentialsId: 'kubeconfig']) {
+        //       parallel(
+        //         "Deployment": {
+        //           withKubeConfig([credentialsId: 'kubeconfig']) {
+        //             sh "bash k8s-deployment.sh"
+        //           }
+        //         },
+        //         "Rollout Status": {
+        //           withKubeConfig([credentialsId: 'kubeconfig']) {
         //             sh "bash k8s-deployment-rollout-status.sh"
+        //           }
+        //         }
+        //       )
         //     }
-        //   }
-        // }    
+        // }
+
     }
     post {
       always {

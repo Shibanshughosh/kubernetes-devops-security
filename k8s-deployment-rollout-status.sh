@@ -15,7 +15,7 @@ then
     exit 1;
 else
 	echo "Deployment ${deploymentName} Rollout is Success"
-    rm deploy-failure.txt
+    //rm deploy-failure.txt
     echo "log file deleted"
 fi
 ############### k8s-deployment-rollout-status.sh ###############
