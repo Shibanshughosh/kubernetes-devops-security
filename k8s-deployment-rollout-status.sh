@@ -3,7 +3,7 @@
 
 #k8s-deployment-rollout-status.sh
 
-sleep 10s
+sleep 60s
 # echo "create deployment log file"
 # kubectl describe deploy devsecops -n default >> deploy-failure.txt
 # echo "log file created"
