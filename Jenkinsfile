@@ -7,7 +7,7 @@ environment {
     serviceName = "devsecops-svc"
     imageName = "shibanshughosh/numeric-app:${GIT_COMMIT}"
     applicationURL = "http://159.65.145.67"
-    applicationURI = "increment/99"
+    applicationURI = "increment/98"
     commitId = "${GIT_COMMIT}"
 }
 
