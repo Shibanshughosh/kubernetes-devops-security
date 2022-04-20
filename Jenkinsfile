@@ -123,7 +123,8 @@ environment {
                     } 
                     catch (e) {
                         withKubeConfig([credentialsId: 'kubeconfig']) {
-                            sh "kubectl -n default rollout undo deploy ${deploymentName}"
+                            //sh "kubectl -n default rollout undo deploy ${deploymentName}"
+                            echo 'Integration test failed!!'
                         }
                         throw e
                     }

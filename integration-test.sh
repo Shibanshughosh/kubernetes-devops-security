@@ -5,21 +5,21 @@
 
 sleep 5s
 
-PORT=$(kubectl -n default get svc ${serviceName} -o json | jq .spec.ports[].nodePort)
+port=$(kubectl -n default get svc ${serviceName} -o json | jq .spec.ports[].nodePort)
 
-echo "Port is - $PORT"
-echo "App URL is - $applicationURL:$PORT/$applicationURI"
+echo "Port is - $port"
+echo "App URL is - $applicationURL:$port/$applicationURI"
 
-if [[ ! -z "$PORT" ]];
+if [[ ! -z "$port" ]];
 then
 
-    response=$(curl -s $applicationURL:$PORT$applicationURI)
+    response=$(curl -s $applicationURL:$port$applicationURI)
     echo "The increment value is - $response"
 
-    http_code=$(curl -s -o /dev/null -w "%{http_code}" $applicationURL:$PORT$applicationURI)
+    http_code=$(curl -s -o /dev/null -w "%{http_code}" $applicationURL:$port$applicationURI)
     echo "$http_code"
 
-    echo "The increment value is - $response"
+    echo "The return code is - $response"
 
     if [[ "$response" == 99 ]];
         then
