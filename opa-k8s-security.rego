@@ -1,6 +1,6 @@
 ############### opa-k8s-security.rego ############### 
 package main
-package kubernetes.admission
+#package kubernetes.admission
 
 import data.kubernetes.networkpolicies
 
