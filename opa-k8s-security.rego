@@ -73,7 +73,7 @@ deny[msg] {
 
 deny[msg] {
   input.kind = "NetworkPolicy"
-  not input.request.object.spec.podSelector.matchLabels["app"] == "devsecops"
+  not input.request.object.spec.podSelector.matchLabels.app = "devsecops"
   msg := "Network policy not defined for app - devsecops"
 }
 # deny[msg] {
