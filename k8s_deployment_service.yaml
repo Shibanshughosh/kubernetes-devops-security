@@ -51,22 +51,3 @@ spec:
   selector:
     app: devsecops
   type: NodePort
-
----
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
- name: app-inbound-policy
- namespace: default
-spec:
- podSelector:
-  matchLabels:
-   app: devsecop
- ingress:
-  - from:
-   - podSelector:
-     matchLabels:
-      app: frontend
-   ports:
-    - protocol: TCP
-     port: 80
