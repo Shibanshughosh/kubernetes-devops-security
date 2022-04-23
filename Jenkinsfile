@@ -100,7 +100,7 @@ environment {
         }
         stage('Kubernetes Deployment - DEV') {
             steps {
-              withKubeConfig([credentialsId: 'kubeconfig']) {
+              withKubeConfig([credentialsId: 'kubeconfig-istio']) {
                 sh "sed -i 's#replace#shibanshughosh/numeric-app:${GIT_COMMIT}#g' k8s_deployment_service.yaml"
                 sh "kubectl apply -f k8s_deployment_service.yaml"
             }
@@ -108,7 +108,7 @@ environment {
         }
         stage('Kubernetes Rollout Status') {
             steps {
-              withKubeConfig([credentialsId: 'kubeconfig']) {
+              withKubeConfig([credentialsId: 'kubeconfig-istio']) {
                     sh "bash k8s-deployment-rollout-status.sh"
             }
           }
@@ -117,13 +117,13 @@ environment {
             steps {
                 script {
                     try {
-                        withKubeConfig([credentialsId: 'kubeconfig']) {
+                        withKubeConfig([credentialsId: 'kubeconfig-istio']) {
                             // sh "bash integration-test.sh"
                             echo "Test  passed"
                         }
                     } 
                     catch (e) {
-                        withKubeConfig([credentialsId: 'kubeconfig']) {
+                        withKubeConfig([credentialsId: 'kubeconfig-istio']) {
                             //sh "kubectl -n default rollout undo deploy ${deploymentName}"
                             echo 'Integration test failed!!'
                         }
