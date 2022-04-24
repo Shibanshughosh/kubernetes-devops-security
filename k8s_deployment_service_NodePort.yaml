@@ -5,7 +5,7 @@ metadata:
     app: devsecops
   name: devsecops
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: devsecops
@@ -26,9 +26,6 @@ spec:
         - mountPath: /tmp
           name: vol
         securityContext:
-          capabilities:
-            drop:
-             - NET_RAW
           runAsNonRoot: true
           runAsUser: 100
           readOnlyRootFilesystem: true
@@ -54,4 +51,4 @@ spec:
     targetPort: 8080
   selector:
     app: devsecops
-  type: ClusterIP
+  type: NodePort

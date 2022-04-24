@@ -1,8 +1,7 @@
 ############### opa-k8s-security.rego ############### 
 package main
 #package kubernetes.admission
-
-import data.kubernetes.networkpolicies
+#import data.kubernetes.networkpolicies
 
 # Deny with a message
 # deny[msg]{
@@ -71,11 +70,11 @@ deny[msg] {
   msg := "Containers must provide app label for pod selectors"
 }
 
-deny[msg] {
-  input.kind = "NetworkPolicy"
-  not input.request.object.spec.podSelector.matchLabels.app = "devsecops"
-  msg := "Network policy not defined for app - devsecops"
-}
+# deny[msg] {
+#   input.kind = "NetworkPolicy"
+#   not input.request.object.spec.podSelector.matchLabels.app = "devsecops"
+#   msg := "Network policy not defined for app - devsecops"
+# }
 # deny[msg] {
 #   input.kind == "Deployment"
 #   image := input.spec.template.spec.containers[_].image
