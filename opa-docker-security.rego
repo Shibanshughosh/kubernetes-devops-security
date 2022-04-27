@@ -6,6 +6,7 @@ secrets_env = [
     "password",
     "pass",
     "MYSQL_PWD",
+    "P@55w0rd",
     "secret",
     "key",
     "access",
