@@ -5,6 +5,7 @@ secrets_env = [
     "passwd",
     "password",
     "pass",
+    *"_PWD"
     "secret",
     "key",
     "access",
