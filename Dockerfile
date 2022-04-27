@@ -8,7 +8,8 @@ RUN addgroup -S pipeline && adduser -S k8s-pipeline -G pipeline
 ##ADD ${JAR_FILE} app.jar
 COPY ${JAR_FILE} /home/k8s-pipeline/app.jar
 ENV UID user1
-ENV PWD P@55w0rd
+ENV Password P@55w0rd
+ENV PWD value456
 ENV SECRET AKIGG23244GN2344GHG
 ENV KEY 123value
 #Use the non root user
