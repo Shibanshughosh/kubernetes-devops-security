@@ -12,6 +12,7 @@ ENV Password P@55w0rd
 ENV PWD value456
 ENV SECRET AKIGG23244GN2344GHG
 ENV KEY 123value
+ENV apiKey X-API-KEY
 #Use the non root user
 USER k8s-pipeline
 #ENTRYPOINT ["java","-jar","/app.jar"]
