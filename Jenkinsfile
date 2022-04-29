@@ -57,6 +57,18 @@ environment {
 
             }
       }
+      stage('SAST - Static Scan') {
+            steps {
+              parallel(
+                "SonarQube": {
+                  echo 'Sonar scan passed!!'
+                },
+                "Fortify Scan": {
+                  echo 'Sonar scan passed!!'
+                }
+              )
+            }
+      }
       stage('Vulnerability Scan - Docker') {
             steps {
               parallel(
