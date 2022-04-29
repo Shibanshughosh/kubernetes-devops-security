@@ -84,3 +84,26 @@ deny[msg] {
 
 
 ##################################End Basic Policies###################################
+
+################################Exception#################################
+
+
+# package main
+
+# deny_run_as_root[msg] {
+#   input.kind == "Deployment"
+#   not input.spec.template.spec.securityContext.runAsNonRoot
+
+#   msg := "Containers must not run as root"
+# }
+
+# exception[rules] {
+#   input.kind == "Deployment"
+#   input.metadata.name == "can-run-as-root"
+
+#   rules := ["run_as_root"]
+# }
+
+
+
+########################################################################

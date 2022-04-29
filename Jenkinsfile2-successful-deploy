@@ -41,20 +41,32 @@ environment {
       //       //   }
       //       // }
       // }
-      stage('SonarQube - SAST') {
+      // stage('SonarQube - SAST') {
+      //       steps {
+      //       /*  withSonarQubeEnv('SonarQube') {
+      //           sh "mvn sonar:sonar \
+      //                   -Dsonar.projectKey=numeric-application \
+      //                   -Dsonar.host.url=http://devsecops-demo.eastus.cloudapp.azure.com:9000"
+      //         }
+      //         timeout(time: 2, unit: 'MINUTES') {
+      //           script {
+      //             waitForQualityGate abortPipeline: true
+      //           }
+      //         } */
+      //         echo 'Sonar scan passed!!'
+      //       }
+      // }
+      stage('SAST - Static Scan ') {
             steps {
-            /*  withSonarQubeEnv('SonarQube') {
-                sh "mvn sonar:sonar \
-                        -Dsonar.projectKey=numeric-application \
-                        -Dsonar.host.url=http://devsecops-demo.eastus.cloudapp.azure.com:9000"
-              }
-              timeout(time: 2, unit: 'MINUTES') {
-                script {
-                  waitForQualityGate abortPipeline: true
+              parallel(
+                "SonarQube": {
+                //  sh "mvn dependency-check:check"
+                  echo 'Sonar scan passed!!'
+                },
+                "Fortify Scan": {
+                  echo 'Sonar scan passed!!'
                 }
-              } */
-              echo 'Sonar scan passed!!'
-
+              )
             }
       }
       stage('Vulnerability Scan - Docker') {
