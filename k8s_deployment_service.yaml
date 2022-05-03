@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: devsecops
-    version: v1.0
+    version: v1
   name: devsecops
   namespace: default
 spec:
@@ -13,7 +13,7 @@ spec:
   selector:
     matchLabels:
       app: devsecops
-      # version: v1.0
+      # version: v1
   strategy: 
     rollingUpdate:
       maxSurge: 25%
@@ -23,7 +23,7 @@ spec:
     metadata:
       labels:
         app: devsecops
-        # version: v1.0
+        version: v1
     spec:
       volumes:
       - name: vol
@@ -33,6 +33,8 @@ spec:
       - image: replace
         name: devsecops-container
         imagePullPolicy: IfNotPresent
+        - containerPort: 8090
+          protocol: TCP
         volumeMounts:
         - mountPath: /tmp
           name: vol
@@ -61,8 +63,10 @@ metadata:
 spec:
   ports:
   - port: 8080
+    name: tcp-devsecops
     protocol: TCP
     targetPort: 8080
   selector:
     app: devsecops
+    version: v1
   type: ClusterIP
