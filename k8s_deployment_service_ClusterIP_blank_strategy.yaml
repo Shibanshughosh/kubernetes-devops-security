@@ -3,17 +3,23 @@ kind: Deployment
 metadata:
   labels:
     app: devsecops
+    version: v1.0
   name: devsecops
+  namespace: default
 spec:
   replicas: 3
+  progressDeadlineSeconds: 600
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
       app: devsecops
+      version: v1.0
   strategy: {}
   template:
     metadata:
       labels:
         app: devsecops
+        version: v1.0
     spec:
       volumes:
       - name: vol
