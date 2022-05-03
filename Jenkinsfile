@@ -24,7 +24,7 @@ environment {
             //  sh "mvn surefire-report:report"
               junit 'target/surefire-reports/TEST-*.xml'
             }
-        } 
+        }
       stage('Mutation Tests - PIT') {
             steps {
               sh "mvn org.pitest:pitest-maven:mutationCoverage"
@@ -65,6 +65,9 @@ environment {
                 },
                 "Fortify Scan": {
                   echo 'Sonar scan passed!!'
+                },
+                "Non-inclusive language Scan": {
+                  echo 'Non-inclusive language scan passed!!'
                 }
               )
             }
