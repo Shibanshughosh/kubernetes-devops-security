@@ -33,8 +33,9 @@ spec:
       - image: replace
         name: devsecops-container
         imagePullPolicy: IfNotPresent
+        ports:
         - containerPort: 8090
-          # protocol: TCP
+          protocol: TCP
         volumeMounts:
         - mountPath: /tmp
           name: vol
