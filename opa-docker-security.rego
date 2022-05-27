@@ -31,6 +31,14 @@ deny[msg] {
 #     msg = sprintf("Line %d: use a trusted base image", [i])
 # }
 
+# Only use trusted base images
+# warn[msg] {
+#	input[i].Cmd == "from"
+#	image := input[i].Value[0]
+#	not startswith(image, "private_repo/")
+#	msg := sprintf("Base image '%v' is used from untrusted registry", [image])
+#}
+
 # Do not use 'latest' tag for base imagedeny[msg] {
 deny[msg] {
     input[i].Cmd == "from"
